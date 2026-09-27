@@ -4,7 +4,7 @@ on:
   push:
     branches: [main]
     paths:
-      - 'Beni_gyakorlás/**'
+      - 'project_4_upgraded_vocab_practice.html'
       - '.github/workflows/deploy-neocities.yml'
   workflow_dispatch:
 
@@ -18,4 +18,7 @@ jobs:
           NEOCITIES_API_KEY: ${{ secrets.NEOCITIES_API_KEY }}
         run: |
           test -n "$NEOCITIES_API_KEY"
-          curl --fail-with-body             -H "Authorization: Bearer $NEOCITIES_API_KEY"             -F "Beni_gyakorlás/project_4_upgraded_vocab_practice.html=@Beni_gyakorlás/project_4_upgraded_vocab_practice.html;type=text/html"             https://neocities.org/api/upload
+          curl --fail-with-body \
+            -H "Authorization: Bearer $NEOCITIES_API_KEY" \
+            -F "Beni_gyakorlás/project_4_upgraded_vocab_practice.html=@project_4_upgraded_vocab_practice.html;type=text/html" \
+            https://neocities.org/api/upload
