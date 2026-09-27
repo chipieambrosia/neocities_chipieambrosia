@@ -1,0 +1,21 @@
+name: Deploy to Neocities
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'Beni_gyakorlás/**'
+      - '.github/workflows/deploy-neocities.yml'
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Upload Project 4 vocab practice
+        env:
+          NEOCITIES_API_KEY: ${{ secrets.NEOCITIES_API_KEY }}
+        run: |
+          test -n "$NEOCITIES_API_KEY"
+          curl --fail-with-body             -H "Authorization: Bearer $NEOCITIES_API_KEY"             -F "Beni_gyakorlás/project_4_upgraded_vocab_practice.html=@Beni_gyakorlás/project_4_upgraded_vocab_practice.html;type=text/html"             https://neocities.org/api/upload
